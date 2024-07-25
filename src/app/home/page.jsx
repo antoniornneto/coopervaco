@@ -1,28 +1,53 @@
+"use client";
+
 import Image from "next/image";
 import logo from "../../../public/assets/logo.svg";
 import avatar from "../../../public/assets/erasmo.jpg";
 import Button from "@/components/Button";
 import { Pencil, Trash2, Download, Eye } from "lucide-react";
+import prisma from "@/lib/prisma";
+import { useState } from "react";
+
+// async function getAtas() {
+//   const atas = await prisma.post.findMany({
+//     where: { signed: false },
+//   });
+//   return atas;
+// }
 
 export default function Home() {
+  const [isCreateModal, setIsCreateModal] = useState(false);
+
+  function createAtaModalIsActive() {
+    setIsCreateModal(true);
+  }
+  // const atas = await getAtas();
+
+  // console.log(atas);
+
   const atas = [
     {
-      date: "15/07/2024",
-      title: "Apresentação do protótipo",
+      title: "Titulo fictício",
+      data: "23/06/2024",
     },
     {
-      date: "11/07/2024",
-      title: "Discussões dos tópicos",
+      title: "Titulo fictício",
+      data: "23/06/2024",
     },
     {
-      date: "10/07/2024",
-      title: "Orçamento referente ao sistema de atas",
+      title: "Titulo fictício",
+      data: "23/06/2024",
     },
     {
-      date: "18/07/2024",
-      title: "Reunião para tratar da ata eletrônica",
+      title: "Titulo fictício",
+      data: "23/06/2024",
+    },
+    {
+      title: "Titulo fictício",
+      data: "23/06/2024",
     },
   ];
+
   return (
     <>
       <header className="h-32 flex">
@@ -54,8 +79,11 @@ export default function Home() {
           >
             <option value="">2024</option>
           </select>
+          <button onClick={createAtaModalIsActive}>Criar Ata</button>
           <Button style={"w-32 h-8"}>Criar Ata</Button>
         </section>
+
+        {isCreateModal && <div className="w-[732px] h-[526px]">MODAL</div>}
 
         <div className="w-11/12 mx-auto">
           <div className="flex gap-6 mb-4">
@@ -76,7 +104,7 @@ export default function Home() {
                   className="border-[1px] border-zinc-300 h-16 flex items-center text-xl px-3 py-5 justify-between"
                 >
                   <div className="flex items-center gap-20">
-                    <span>{ata.date}</span>
+                    <span>{ata.data}</span>
                     <span>{ata.title}</span>
                   </div>
                   <div className="flex items-center gap-4">

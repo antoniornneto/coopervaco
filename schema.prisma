@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String
+  birthday     DateTime
+  tel          String
+  registration Int
+  signature    String?
+  role         String
+  password     String
+  Post         Post?    @relation(fields: [postId], references: [id])
+  postId       Int?
+
+  @@map("user")
+}
+
+model Post {
+  id              Int       @id @default(autoincrement())
+  date            DateTime?
+  createAt        DateTime  @default(now()) @map("create_at")
+  title           String?
+  mainContent     String?   @map("main_content")
+  approvedContent String?   @map("approved_content")
+  signed          Boolean   @default(false)
+  participants    User[]
+
+  @@map("ata")
+}

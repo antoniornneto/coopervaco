@@ -32,15 +32,14 @@ export default function Page() {
           >
             Login
           </Link>
-          <Button
-            type={"submit"}
-            textColor="primary"
-            style={
-              "bg-transparent border-[1px] border-primary hover:text-white"
-            }
+
+          <Link
+            className="bg-transparent h-14 rounded-xl flex justify-center items-center font-bold text-primary border-[1px] border-primary hover:bg-primary hover:text-white"
+            href={"/create-new-account"}
           >
             Cadastrar-me
-          </Button>
+          </Link>
+
           <Image className="self-center" src={logo} alt="logo da cooperativa" />
         </div>
       </div>
