@@ -70,27 +70,27 @@ export default function CreateNewAccount() {
       const file = signature;
       console.log(file);
 
-      // const User = {
-      //   name: name.toString(),
-      //   role: role.toString(),
-      //   tel: celphone.toString(),
-      //   birthday: new Date(birthday),
-      //   registration: parseInt(registration),
-      //   email: email.toString(),
-      //   password: password.toString(),
-      // };
+      const User = {
+        name: name.toString(),
+        role: role.toString(),
+        tel: celphone.toString(),
+        birthday: new Date(birthday),
+        registration: parseInt(registration),
+        email: email.toString(),
+        password: password.toString(),
+      };
 
-      // try {
-      //   fetch("/api/add-ata", {
-      //     method: "POST",
-      //     headers: {
-      //       "Contet-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(User),
-      //   });
-      // } catch (error) {
-      //   console.log(error);
-      // }
+      try {
+        fetch("/api/add-ata", {
+          method: "POST",
+          headers: {
+            "Contet-Type": "application/json",
+          },
+          body: JSON.stringify(User),
+        });
+      } catch (error) {
+        console.log(error);
+      }
 
       setName("");
       setRole("");
