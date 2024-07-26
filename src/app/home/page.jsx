@@ -5,8 +5,8 @@ import logo from "../../../public/assets/logo.svg";
 import avatar from "../../../public/assets/erasmo.jpg";
 import Button from "@/components/Button";
 import { Pencil, Trash2, Download, Eye } from "lucide-react";
-import prisma from "@/lib/prisma";
 import { useState } from "react";
+import CreateAtaModal from "./create-ata-modal";
 
 // async function getAtas() {
 //   const atas = await prisma.post.findMany({
@@ -16,14 +16,15 @@ import { useState } from "react";
 // }
 
 export default function Home() {
-  const [isCreateModal, setIsCreateModal] = useState(false);
+  const [createModal, setCreateModal] = useState(false);
 
-  function createAtaModalIsActive() {
-    setIsCreateModal(true);
+  function isCreateModalOpen() {
+    setCreateModal(true);
   }
-  // const atas = await getAtas();
 
-  // console.log(atas);
+  function isCreateModalClosed() {
+    setCreateModal(false);
+  }
 
   const atas = [
     {
@@ -52,7 +53,12 @@ export default function Home() {
     <>
       <header className="h-32 flex">
         <div className="w-96 h-full bg-zinc-300 flex justify-center">
-          <Image src={logo} alt="logo da cooperativa" />
+          <Image
+            priority={true}
+            width={300}
+            src={logo}
+            alt="logo da cooperativa"
+          />
         </div>
         <div className="bg-secundary flex flex-1 w-full px-10 items-center text-white">
           <div className="flex items-center gap-2 ml-auto">
@@ -60,30 +66,32 @@ export default function Home() {
               <h1>Dr. Erasmo</h1>
               <span>Mat.: 0967</span>
             </div>
-            <Image
-              className="w-20 h-20 rounded-full border-2 border-white"
-              src={avatar}
-              alt={`Avatar do usuario`}
-            />
+            <div className="w-20 h-20 rounded-full border-2 border-white">
+              <Image src={avatar} alt={`Avatar do usuario`} />
+            </div>
           </div>
         </div>
       </header>
+
+      {createModal && <CreateAtaModal closeModal={isCreateModalClosed} />}
 
       <main className="flex flex-col space-y-10 font-roboto">
         <section className="w-11/12 flex flex-1 items-center gap-10 py-8 mx-auto">
           <h1 className="text-5xl">Atas de Reuniões</h1>
           <select
-            className="border-[1px] border-zinc-200 rounded-lg w-36 h-8 px-5"
+            className="border-[1px] border-zinc-200 rounded-lg w-36 h-10 px-5 text-zinc-700 "
             name=""
             id=""
           >
             <option value="">2024</option>
           </select>
-          <button onClick={createAtaModalIsActive}>Criar Ata</button>
-          <Button style={"w-32 h-8"}>Criar Ata</Button>
+          <button
+            className="w-36 h-10 bg-primary rounded-lg text-white font-medium hover:bg-primary/90"
+            onClick={isCreateModalOpen}
+          >
+            Criar Ata
+          </button>
         </section>
-
-        {isCreateModal && <div className="w-[732px] h-[526px]">MODAL</div>}
 
         <div className="w-11/12 mx-auto">
           <div className="flex gap-6 mb-4">
@@ -109,11 +117,15 @@ export default function Home() {
                   </div>
                   <div className="flex items-center gap-4">
                     <span>70%</span>
-                    <Pencil color="#000000" />
-                    <Trash2 color="#000000" />
-                    <Download color="#000000" />
-                    <Eye color="#000000" />
-                    <Button style={"w-32 h-8 rounded-3xl text-sm"}>
+                    <Pencil />
+                    <Trash2 />
+                    <Download />
+                    <Eye />
+                    <Button
+                      style={
+                        "w-36 h-10 bg-primary text-white rounded-full text-sm hover:bg-primary/85"
+                      }
+                    >
                       Assinar Ata
                     </Button>
                   </div>

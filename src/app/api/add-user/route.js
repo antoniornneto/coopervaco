@@ -1,5 +1,4 @@
 import prisma from "@/lib/prisma";
-import { RollerCoaster } from "lucide-react";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
